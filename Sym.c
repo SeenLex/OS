@@ -16,12 +16,13 @@ void change_permissions(char *filename){
 
     if((pid_permission = fork()) == 0){
 
-        if(lchmod(filename, S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP) == -1){
+        if(chmod(filename, S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP) == -1){
             perror("lchmod");
         
         } else{
             printf("Permissions of symbolic link '%s' changed successfully.\n", filename);
         }
+        exit(pid_permission);
     }     
 }
 
@@ -60,6 +61,7 @@ void print_access_rights_sym(char *path){
 
 void symlink_options_selector(char *option, char *filename){
     
+    change_permissions(filename);
     if((pid_options = fork()) == 0){
         if(strcmp(option, "-n") == 0){
             printf("File name: %s\n", filename);

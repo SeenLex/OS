@@ -28,14 +28,15 @@ void create_textfile(char *dirname){
         fprintf(file, "This is a sample text file created for directory '%s'.\n", dirname);
         fclose(file);
         printf("Text file '%s' created successfully.\n", filename);
+
+        exit(pid_create);
     }
     
-    exit(pid_create);
 }
 
 void wait_for_process_dir(int pid){
     
-    sleep(1);
+    sleep(0.5);
     int status;
     waitpid(pid, &status, 0);
     printf("\nThe process with PID %d has ended with the exit code %d.", pid, status);
@@ -72,6 +73,7 @@ void directory_options_selector(char *option, char *filename){
     create_textfile(filename);
     
     if((pid_options = fork()) == 0){
+        
         if(strcmp(option, "-n") == 0){
             printf("\nDirectory name: %s\n\n", filename);
         
@@ -104,14 +106,15 @@ void directory_options_selector(char *option, char *filename){
             while((entry = readdir(dir)) != NULL){
                 
                 struct stat sb;
-                char path[256];
+                char path[500];
                 
-                snprintf(path, sizeof(path), "%s/%s", filename, entry->d_name);
+                snprintf(path, 500,"%s/%s", filename, entry->d_name);
                 
                 if(stat(path, &sb) == -1){
                     perror("stat");
                     continue;
                 }
+                
                 if(S_ISREG(sb.st_mode)){
                     const char *ext = strrchr(entry->d_name, '.');
                     
