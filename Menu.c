@@ -41,7 +41,7 @@ void print_file_info(int noOfFiles, char *path[]){
             printf("\t-l: Create symbolic link (requires input)\n");
 
             printf("Enter option: ");
-            scanf("%s", options);
+            scanf("%2s", options);
             printf("\n");
             regular_file_options_selector(options, path[i]);
         
@@ -56,7 +56,7 @@ void print_file_info(int noOfFiles, char *path[]){
             printf("-a: Access rights\n");
 
             printf("Enter option: ");
-            scanf("%s", options);
+            scanf("%2s", options);
            
             symlink_options_selector(options, path[i]);
 
@@ -70,7 +70,7 @@ void print_file_info(int noOfFiles, char *path[]){
             printf("-c: Total number of files with .c extension\n");
 
             printf("\nEnter option: ");
-            scanf("%s", options);
+            scanf("%2s", options);
             printf("\n");
             directory_options_selector(options, path[i]);   
 
