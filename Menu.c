@@ -20,7 +20,7 @@ void print_file_info(int noOfFiles, char *path[]){
     for(int i = 1; i <= noOfFiles; i++){          
         if(lstat(path[i], &sb) == -1){
             
-            perror("stat");
+            //perror("stat");
             exit(EXIT_FAILURE);
         }
         

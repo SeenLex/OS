@@ -11,6 +11,7 @@
 #include <dirent.h>
 #include <time.h>
 #include "Validation.c"
+#include "ComputeScore.c"
 
 int pid_options;
 int pid_extension;
@@ -23,7 +24,7 @@ void count_lines(char filename[]){
         return;
     }
 
-    int line_count = 0;
+    int line_count = 1;
     char ch;
     
     while((ch = fgetc(file)) != EOF){
@@ -42,6 +43,7 @@ void verify_extension(char filename[]){
         char *extension = strrchr(filename, '.');
         if(extension && strcmp(extension, ".c") == 0){
             printf("The file '%s' has the '.c' extension.\n", filename);
+            get_score(filename);
         } else{
             count_lines(filename);
         }
